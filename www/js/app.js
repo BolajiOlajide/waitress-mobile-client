@@ -60,7 +60,8 @@ angular.module('waitress', [
         abstract: true,
         url: '/dashboard',
         templateUrl: 'partials/dashboard.html',
-        controller: 'dashboardController'
+        controller: 'dashboardController',
+        controllerAs: 'dashboard'
       })
       .state('dashboard.tap', {
         url: '/dashboard/home',
