@@ -2,7 +2,7 @@ angular.module('waitress', [
   'ionic',
   'ngCordova',
   'ionic-datepicker'
-  ])
+])
   .run(function($ionicPlatform, $rootScope, nfcService) {
     // Handles State change to trigger the nfcService
 
@@ -19,7 +19,6 @@ angular.module('waitress', [
       }
     });
     $ionicPlatform.ready(function() {
-
       if (window.cordova && window.cordova.plugins.Keyboard) {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -48,7 +47,7 @@ angular.module('waitress', [
           midday: ['MealSession', function(MealSession) {
             return MealSession.getMidday()
               .then(function(result) {
-                navigator.splashscreen && navigator.splashscreen.hide();
+                navigator.splashscreen && navigator.splashscreen.hide(); // eslint-disable-line no-unused-expressions
                 return result;
               });
           }]
