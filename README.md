@@ -34,10 +34,9 @@ npm install -g cordova ionic
 cd /ionic-client/waitress/
 npm install
 bower install
+bower install ngCordova
 ```
 * Startup the mobile client
-
-_Before starting the client, ensure you are in the waitress directory `cd /ionic-client/waitress`_
 ```
 ionic serve --lab
 ```
