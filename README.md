@@ -29,9 +29,9 @@ git clone git@github.com:waitress-andela/waitress-mobile-client.git
 ```
 npm install -g cordova ionic
 ```
-* Navigate into `ionic-client/waitress/` and install dependencies
+* Navigate to the root of the repository
 ```
-cd /ionic-client/waitress/
+cd waitress-mobile-client
 npm install
 bower install
 bower install ngCordova
