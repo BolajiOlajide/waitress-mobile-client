@@ -3,9 +3,8 @@ angular.module('waitress', [
   'ngCordova',
   'ionic-datepicker'
 ])
-  .run(function($ionicPlatform, $rootScope, nfcService) {
+  .run(function($ionicPlatform, $rootScope, nfcService, $state) {
     // Handles State change to trigger the nfcService
-
     ionic.Platform.fullScreen();
     $rootScope.$on('$stateChangeSuccess', function(ev, to, toParam, from) {
       if (from.name === 'dashboard.tap' || from.name === 'dashboard.nfc') {
@@ -16,6 +15,10 @@ angular.module('waitress', [
       }
       if (to.name === 'dashboard.nfc') {
         nfcService.init(true);
+      }
+      if ((from.name !== 'dashboard.login-usernames' && !from.requireAuth) &&
+        to.requireAuth) {
+        $state.go('dashboard.login-usernames');
       }
     });
     $ionicPlatform.ready(function() {
@@ -108,6 +111,15 @@ angular.module('waitress', [
         }
 
       })
+      .state('dashboard.login-usernames', {
+        url: '/login-usernames',
+        views: {
+          'list-tab': {
+            controller: 'LoginForUserNameController',
+            templateUrl: 'partials/login-username.html'
+          }
+        }
+      })
       .state('dashboard.alphabets', {
         url: '/list-names-by-alphabet',
         views: {
@@ -115,8 +127,8 @@ angular.module('waitress', [
             controller: 'ListAlphabetsController',
             templateUrl: 'partials/alphabets.html'
           }
-        }
-
+        },
+        requireAuth: true
       })
       .state('dashboard.usernames', {
         url: '/list/:character',
@@ -133,8 +145,8 @@ angular.module('waitress', [
             controller: 'listController',
             templateUrl: 'partials/list-names.html'
           }
-        }
-
+        },
+        requireAuth: true
       })
       .state('dashboard.report-daily', {
         url: '/report/daily',
