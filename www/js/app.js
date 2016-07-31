@@ -18,7 +18,7 @@ angular.module('waitress', [
       }
       if ((from.name !== 'dashboard.login-usernames' && !from.requireAuth) &&
         to.requireAuth) {
-        $state.go('dashboard.login-usernames', {}, {reload: true});
+        $state.go('dashboard.login-usernames');
       }
     });
     $ionicPlatform.ready(function() {

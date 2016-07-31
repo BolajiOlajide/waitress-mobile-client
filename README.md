@@ -49,7 +49,14 @@ export ANDROID_HOME=~/android-sdk-mac // this is dependent on where your app was
 PATH=$PATH:$ANDROID_HOME/tools
 PATH=$PATH:$ANDROID_HOME/platform-tools   
 cordova add platform android
-ionic build android --device make sure your device is connected
+android update sdk -u -a -t 19
+android update sdk -u -a -t 20
+Open the SDK manager by running: [your-download-folder]/android/tools/android
+You will require:
+1. "SDK Platform" for android-23
+2. "Android SDK Platform-tools (latest)
+3. "Android SDK Build-tools" (latest)
+ionic build android --device // make sure your device is connected
 ```
 
 And you are all setup :)
