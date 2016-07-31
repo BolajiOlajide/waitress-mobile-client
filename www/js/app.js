@@ -18,7 +18,7 @@ angular.module('waitress', [
       }
       if ((from.name !== 'dashboard.login-usernames' && !from.requireAuth) &&
         to.requireAuth) {
-        $state.go('dashboard.login-usernames');
+        $state.go('dashboard.login-usernames', {}, {reload: true});
       }
     });
     $ionicPlatform.ready(function() {
@@ -113,6 +113,7 @@ angular.module('waitress', [
       })
       .state('dashboard.login-usernames', {
         url: '/login-usernames',
+        cache: false,
         views: {
           'list-tab': {
             controller: 'LoginForUserNameController',

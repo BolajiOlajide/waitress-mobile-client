@@ -40,5 +40,16 @@ bower install ngCordova
 ```
 ionic serve --lab
 ```
+*Once you are done and you want to test on your device
+Download android sdk tool from https://developer.android.com/studio/index.html
+run the following commands
+
+```
+export ANDROID_HOME=~/android-sdk-mac // this is dependent on where your app was downloaded and your OS
+PATH=$PATH:$ANDROID_HOME/tools
+PATH=$PATH:$ANDROID_HOME/platform-tools   
+cordova add platform android
+ionic build android --device make sure your device is connected
+```
 
 And you are all setup :)

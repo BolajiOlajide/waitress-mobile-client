@@ -11,12 +11,15 @@ LoginForUserNameController.$inject = ['$scope', '$ionicHistory', '$state', '$cor
 @return {void}
 */
 function LoginForUserNameController($scope, $ionicHistory, $state, $cordovaToast) {
-  $ionicHistory.clearHistory();
-  $scope.password = '';
   $scope.verifyPassword = function(password) {
     if (password === 'andela2016') {
       return $state.go('dashboard.alphabets');
     }
     return $cordovaToast.show('You entered the wrong password', 'short', 'top');
+  };
+  $scope.init = function() {
+    console.log('did you always get here?');
+    $ionicHistory.clearHistory();
+    $scope.password = '';
   };
 }
