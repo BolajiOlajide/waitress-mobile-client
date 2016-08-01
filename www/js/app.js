@@ -5,7 +5,7 @@ angular.module('waitress', [
 ])
   .run(function($ionicPlatform, $rootScope, nfcService, $state) {
     // Handles State change to trigger the nfcService
-    ionic.Platform.fullScreen();
+    // ionic.Platform.fullScreen(); // should be unccommented whenever we need full screen
     $rootScope.$on('$stateChangeSuccess', function(ev, to, toParam, from) {
       if (from.name === 'dashboard.tap' || from.name === 'dashboard.nfc') {
         nfcService.remove();
@@ -39,7 +39,8 @@ angular.module('waitress', [
       // on a real divice.
     });
   })
-  .config(function($stateProvider, $urlRouterProvider, $logProvider, $ionicConfigProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $logProvider,
+    $ionicConfigProvider) {
     $urlRouterProvider.otherwise('/');
     $ionicConfigProvider.tabs.position('bottom');
     $logProvider.debugEnabled(true);
@@ -133,6 +134,7 @@ angular.module('waitress', [
       })
       .state('dashboard.usernames', {
         url: '/list/:character',
+        cache: false,
         resolve: {
           names: ['User', '$stateParams', function(User, $stateParams) {
             return User.filter($stateParams.character)
@@ -151,6 +153,7 @@ angular.module('waitress', [
       })
       .state('dashboard.report-daily', {
         url: '/report/daily',
+        cache: false,
         resolve: {
           dailyReports: ['MealSession', function(MealSession) {
             return MealSession.report()

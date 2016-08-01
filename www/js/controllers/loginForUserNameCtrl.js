@@ -18,7 +18,6 @@ function LoginForUserNameController($scope, $ionicHistory, $state, $cordovaToast
     return $cordovaToast.show('You entered the wrong password', 'short', 'top');
   };
   $scope.init = function() {
-    console.log('did you always get here?');
     $ionicHistory.clearHistory();
     $scope.password = '';
   };
