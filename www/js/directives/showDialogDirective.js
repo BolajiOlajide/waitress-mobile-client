@@ -34,13 +34,13 @@ function showDialogDirective($ionicPopup, MealSession, $state, $log) {
             onTap: function(e) {
               e.preventDefault();
               var data = {
-                before_midday: scope.beforeMidday,
+                before_midday: scope.beforeMidday, // eslint-disable-line camelcase
                 passphrase: scope.data.password
               };
               $log.debug(data);
               if (scope.data.password) {
                 $log.debug(data);
-                MealSession.start('http://waitressandela.herokuapp.com/meal-sessions/start/', data)
+                MealSession.start('/meal-sessions/start/', data)
                   .then(function() {
                     dialog.close();
                     $state.go('dashboard.tap');

@@ -1,16 +1,18 @@
 angular.module('waitress')
   .factory('slackService', slackService);
 
-slackService.$inject = ['$http', '$q', '$httpParamSerializerJQLike', '$state'];
+slackService.$inject = ['$http', '$q', '$httpParamSerializerJQLike',
+ 'SERVER_LINK'];
 
 /**
 * Controller That takes care of the slackservice
 @param {service} $http, $http service
 @param {service} $q,
 @param {service} $httpParamSerializerJQLike,
+@param {service} SERVER_LINK,
 @return {void}
 */
-function slackService($http, $q, $httpParamSerializerJQLike) {
+function slackService($http, $q, $httpParamSerializerJQLike, SERVER_LINK) {
 /**
 * Utility method to retrive data from url
 @param {string} url, The input url to get data from
@@ -37,11 +39,13 @@ function slackService($http, $q, $httpParamSerializerJQLike) {
     return deffered.promise;
   }
   var getSlackId = function(id) {
-    return getData('http://waitressandela.herokuapp.com/users/' + id + '/retrieve-secure/', {
+    return getData(SERVER_LINK + '/users/' + id + '/retrieve-secure/', {
       passphrase: 'andela2016'});
   };
   var tap = function(slackUserId) {
-    return getData('http://waitressandela.herokuapp.com/users/nfctap/', {
+    console.log(slackUserId);
+    console.log(SERVER_LINK, 'server link');
+    return getData(SERVER_LINK + '/users/nfctap/', {
       slackUserId: slackUserId
     });
   };

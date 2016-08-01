@@ -2,32 +2,36 @@
 angular.module('waitress')
   .service('User', User);
 
-User.$inject = ['$http', '$q', 'slackService', '$httpParamSerializerJQLike'];
+User.$inject = ['$http', '$q', 'slackService',
+'$httpParamSerializerJQLike', 'SERVER_LINK'];
 
 /**
 * Controller That takes care of the slackservice
-@param {service} $state, $state service
+@param {service} $http,
+@param {service} $q,
+@param {service} slackService,
+@param {service} $httpParamSerializerJQLike,
+@param {constant} SERVER_LINK,
 @return {void}
 */
-
-function User($http, $q, slackService, $httpParamSerializerJQLike) {
+function User($http, $q, slackService,
+  $httpParamSerializerJQLike, SERVER_LINK) {
   var User = {};
-
   /**
-   * @namespace User
-   * @desc Filter users based on first character in their name
-   * @memberOf Factories.User
-   */
+  * Takes care of filtering the users
+  @param {string} character to be used to filter the users,
+  @return {promise} returns promise for the users
+  */
   User.filter = function(character) {
     var deffered = $q.defer();
-    if(!character) {
+    if (!character) {
       return false;
     }
     var params = {
       filter: character
     };
 
-    $http.get('http://waitressandela.herokuapp.com/users/', { params: params })
+    $http.get(SERVER_LINK + '/users/', {params: params})
     .then(function(res) {
       deffered.resolve(res.data);
     }, function(res) {
@@ -35,12 +39,11 @@ function User($http, $q, slackService, $httpParamSerializerJQLike) {
     });
     return deffered.promise;
   };
-
   /**
-   * @namespace User
-   * @desc Tap a user
-   * @memberOf Factories.User
-   */
+  * Takes care of the tap with id
+  @param {string} userId to be returend,
+  @return {promise} returns promise of the users
+  */
   User.tap = function(userId) {
     var deffered = $q.defer();
 
@@ -52,17 +55,16 @@ function User($http, $q, slackService, $httpParamSerializerJQLike) {
       });
     }, function(err) {
       deffered.reject(err);
-    })
+    });
     return deffered.promise;
   };
-
-  /**
-   * @namespace User
-   * @desc Untap a user
-   * @memberOf Factories.User
-   */
+/**
+* Takes care of the untap id
+@param {string} userId to be returend,
+@return {promise} returns promise
+*/
   User.untap = function(userId) {
-    var url = 'http://waitressandela.herokuapp.com/users/' + userId + '/untap/';
+    var url = SERVER_LINK + '/users/' + userId + '/untap/';
     var deffered = $q.defer();
     var data = $httpParamSerializerJQLike({
       passphrase: 'andela2016'
