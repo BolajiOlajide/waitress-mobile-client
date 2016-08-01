@@ -71,6 +71,7 @@ function mealSessionService($q, $http, $httpParamSerializerJQLike,
   };
   var getMidday = function() {
     // offlineDetectorService();
+    console.log(SERVER_LINK);
     return getData(SERVER_LINK + '/meal-sessions/');
   };
   return {

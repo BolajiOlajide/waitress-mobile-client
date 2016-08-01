@@ -6,7 +6,7 @@ nfcService.$inject = ['$rootScope', '$ionicPlatform',
 
 function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, slackService, $cordovaToast, $state) {
   self.write = false;
-  var cardIndex = 223;
+  var cardIndex = 209;
 
   function listenToTag(nfcEvent) {
     var showAlert = function(msg, error) {
@@ -17,17 +17,16 @@ function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, s
           text: 'Ok',
           type: error ? 'button-assertive' : 'button-positive'
         }]
-      }).then(function(res) {
+      }).then(function(res) { // eslint-disable-line no-unused-vars
       });
     };
     if (self.write) {
-
       slackService.getSlackId(cardIndex).then(function(resp) {
-      var record = ndef.textRecord(resp.data.slack_id);
+        var record = ndef.textRecord(resp.data.slack_id);
         nfc.write(
         [record],
         function() {
-           cardIndex++;
+          cardIndex++;
           $rootScope.$apply(function() {
             showAlert('This tag now belongs to ' +
               resp.data.firstname + ' ' + resp.data.lastname);
@@ -40,11 +39,11 @@ function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, s
         },
         function(reason) {
           $rootScope.$apply(function() {
-           showAlert('there was an error ' + reason, true);
+            showAlert('there was an error ' + reason, true);
           });
         }
       );
-      }, function(res){
+      }, function(res) { // eslint-disable-line no-unused-vars
       });
     } else {
       $rootScope.$apply(function() {
@@ -57,8 +56,7 @@ function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, s
           if (err.status === 400) {
             showAlert(err.data.firstname + ' ' +
               err.data.lastname + ' has already tapped', true);
-          }
-          else {
+          } else {
             $state.go('error');
           }
         });
@@ -76,7 +74,7 @@ function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, s
       function(reason) {
         $cordovaToast.show('there was an error ' + reason, 'short', 'top');
       });
-    }
+      }
     });
   };
   var removeListener = function() {
@@ -85,8 +83,8 @@ function nfcService($rootScope, $ionicPlatform, $ionicPopup, $filter, $window, s
         function() {
           $cordovaToast.show('Stopped Listening to nfc', 'short', 'top');
         },
-        function() {
-          $cordovaToast.show('There was an error', 'short', 'top');
+        function(reason) {
+          $cordovaToast.show('There was an error ' + reason, 'short', 'top');
         });
     }
   };

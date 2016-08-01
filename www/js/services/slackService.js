@@ -2,7 +2,7 @@ angular.module('waitress')
   .factory('slackService', slackService);
 
 slackService.$inject = ['$http', '$q', '$httpParamSerializerJQLike',
-'$state', 'SERVER_LINK'];
+ 'SERVER_LINK'];
 
 /**
 * Controller That takes care of the slackservice
@@ -43,6 +43,8 @@ function slackService($http, $q, $httpParamSerializerJQLike, SERVER_LINK) {
       passphrase: 'andela2016'});
   };
   var tap = function(slackUserId) {
+    console.log(slackUserId);
+    console.log(SERVER_LINK, 'server link');
     return getData(SERVER_LINK + '/users/nfctap/', {
       slackUserId: slackUserId
     });
