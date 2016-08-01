@@ -56,7 +56,9 @@ You will require:
 1. "SDK Platform" for android-23
 2. "Android SDK Platform-tools (latest)
 3. "Android SDK Build-tools" (latest)
+ionic state reset
 ionic build android --device // make sure your device is connected
+ionic run android --device
 ```
 
 And you are all setup :)
