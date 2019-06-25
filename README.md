@@ -88,3 +88,11 @@ cordova run --emulator
 ```bash
 cordova prepare && cordova compile
 ```
+
+### JAVA HOME
+
+Ensure you have JAVA JDK 1.8 installed and
+
+```sh
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home
+```
